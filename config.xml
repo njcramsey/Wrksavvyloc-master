@@ -5,6 +5,7 @@
 		id        = "com.mendixcloud.adpinnovation2"
 		version   = "1.0.0" >
 
+	<name>WrkDev</name>
 
 	<description>The acceptance environment build of Wrksavvy.</description>
 
