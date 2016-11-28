@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <script src  "js/js.cookie.js"></script>
+
         <script src="cordova.js"></script>
         <script src="js/bundle.js"></script>
 		<script src="js/jquery.min.js"></script>
@@ -88,7 +88,6 @@
 			}
 
 
-
 			if (window.localStorage && window.localStorage.loginToken) {
 				var params = "loginToken=" + window.localStorage.loginToken;
 				var xhr = new XMLHttpRequest();
@@ -108,7 +107,6 @@
 			} else {
 				window.startApp();
 			}
-
     </script>
 		<script type="text/javascript">
 			document.write( '<style>.hiding-footer{display:none}@media(min-height:' + (window.innerHeight - 50) + 'px){.hiding-footer{display:block}}</style>' );
