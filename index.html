@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-
+        <script src  "js/js.cookie.js"></script>
         <script src="cordova.js"></script>
         <script src="js/bundle.js"></script>
 		<script src="js/jquery.min.js"></script>
@@ -61,6 +61,9 @@
 			    };
 
 
+
+
+
 			    // Handle direct calls like window.open("url","_blank")
 			    window.open = function(url,target,options) {
 			        if ( target == "_top" ) systemOpen(url,options);
@@ -75,17 +78,53 @@
 			    });
 			}
 
+
+
 			window.startApp = function() {
+
 				document.addEventListener("deviceready", function() {
 					//if the splashscreen plugin exists, show it.
 					//if (navigator && navigator.splashscreen) {
 					//	navigator.splashscreen.show();
 					//}
+
+
+
+
+
 					window.openAllLinksWithBlankTargetInSystemBrowser();
 					// Make sure to include the scheme (e.g. http://) in the URL.
-					mxapp.initialize("http://192.168.1.17:8080", enableOffline);
+					mxapp.initialize("http://192.168.1.17:8080/", enableOffline);
+
+          document.addEventListener("pause", onPause, false);
+          function onPause() {
+              pausedate = new Date();
+          }
+          document.addEventListener("resume", onResume, false);
+          function onResume() {
+              var newhour = 2700000;
+              diffhour = (new Date) - pausedate;
+              if (diffhour > newhour)
+              {
+                  setTimeout(function(){
+                    mx.logout();
+                    navigator.notification.alert("For your security, you've been automatically logged out due to inactivity",function(){},"Alert","Close");
+                },0);
+
+              }
+          }
+
+
+
+
+
 				});
+
+
+
 			}
+
+
 
 			if (window.localStorage && window.localStorage.loginToken) {
 				var params = "loginToken=" + window.localStorage.loginToken;
@@ -100,12 +139,13 @@
 						}
 					}
 				};
-				xhr.open("POST", "http://192.168.1.17:8080", true);
+				xhr.open("POST", "http://192.168.1.17:8080/login", true);
 				xhr.withCredentials = true;
 				xhr.send(params);
 			} else {
 				window.startApp();
 			}
+
     </script>
 		<script type="text/javascript">
 			document.write( '<style>.hiding-footer{display:none}@media(min-height:' + (window.innerHeight - 50) + 'px){.hiding-footer{display:block}}</style>' );
